@@ -11,10 +11,14 @@ import CreateAccount from './CreateAccount';
 import Home from './Home';
 import HomeDetails from './Home/details';
 import Profile from './Profile';
+import Chat from './Chat';
+import Upload from './Upload';
 
 import { AuthContext } from './context';
 
 import firebase from './config/firebase';
+
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const AuthStack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
@@ -40,9 +44,37 @@ const ProfileStackScreen = () => (
 )
 
 const TabsScreen = () => (
-  <Tabs.Navigator>
+  <Tabs.Navigator
+    screenOptions={({ route }) => ({
+      tabBarIcon: ({ focused, color, size }) => {
+        let iconName;
+
+        if (route.name === 'Home') {
+          iconName = focused
+            ? 'ios-information-circle'
+            : 'ios-information-circle-outline';
+        } else if (route.name === 'Profile') {
+          iconName = focused ? 'ios-person' : 'ios-person';
+        } else if (route.name === 'Chat') {
+          iconName = focused ? 'ios-information-circle'
+            : 'ios-information-circle-outline';
+        } else if (route.name === 'Upload') {
+          iconName = focused ? 'ios-person' : 'ios-person';
+        }
+
+        // You can return any component that you like here!
+        return <Ionicons name={iconName} size={size} color={color} />;
+      },
+    })}
+    tabBarOptions={{
+      activeTintColor: 'tomato',
+      inactiveTintColor: 'gray',
+    }}
+  >
     <Tabs.Screen name="Home" component={HomeStackScreen} />
     <Tabs.Screen name="Profile" component={ProfileStackScreen} />
+    <Tabs.Screen name="Chat" component={Chat} />
+    <Tabs.Screen name="Upload" component={Upload} />
   </Tabs.Navigator>
 )
 
