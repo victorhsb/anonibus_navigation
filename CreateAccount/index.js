@@ -22,14 +22,14 @@ export default CreateAccount = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.footer}>
+      <View style={styles.view_fields}>
         <TextInput
-          style={styles.input_mensagem}
+          style={styles.input_auth}
           onChangeText={text => setTextEmail(text)}
           value={textEmail} />
 
         <TextInput
-          style={styles.input_mensagem}
+          style={styles.input_auth}
           onChangeText={text => setTextPassword(text.toLowerCase())}
           value={textPassword} secureTextEntry={true} />
       </View>
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     borderRadius: 5
   },
-  input_mensagem: {
+  input_auth: {
     borderColor: '#ccc',
     borderWidth: 1,
     flex: 1,
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     marginTop: 0,
     padding: 4
   },
-  footer: {
+  view_fields: {
     flexDirection: 'column',
     width: '100%',
     height: 100
