@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, TextInput, Button } from "react-native";
+import { View, Text, TextInput, StyleSheet, Button } from "react-native";
 import { } from './styles';
 
 import { AuthContext } from '../context';
@@ -7,6 +7,9 @@ import { AuthContext } from '../context';
 import firebase from 'firebase';
 
 export default CreateAccount = () => {
+
+  const [textEmail, setTextEmail] = React.useState('')
+  const [textPassword, setTextPassword] = React.useState('')
 
   const handleSignUp = () => {
     firebase
@@ -17,20 +20,19 @@ export default CreateAccount = () => {
   }
 
   const { signUp } = React.useContext(AuthContext)
-  const [textEmail, setTextEmail] = React.useState('')
-  const [textPassword, setTextPassword] = React.useState('')
 
   return (
     <View style={styles.container}>
       <View style={styles.view_fields}>
         <TextInput
           style={styles.input_auth}
-          onChangeText={text => setTextEmail(text)}
+          onChangeText={text => setTextEmail(text.toLowerCase())}
           value={textEmail} />
 
         <TextInput
+          placeholder="Digite sua senha"
           style={styles.input_auth}
-          onChangeText={text => setTextPassword(text.toLowerCase())}
+          onChangeText={text => setTextPassword(text)}
           value={textPassword} secureTextEntry={true} />
       </View>
       <Button title="Criar Conta" onPress={() => handleSignUp()} />

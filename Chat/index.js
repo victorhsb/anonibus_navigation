@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import {
-  StyleSheet, View, Text, YellowBox, Image, ScrollView,
+  StyleSheet, View, Text, Image, ScrollView,
   TextInput, TouchableOpacity
 } from 'react-native';
 import firebase from '../config/firebase';
@@ -98,7 +98,12 @@ export default function Chat() {
               <Image style={styles.avatar_conversa} source={{ uri: item.avatar }} />
               <View style={{ flexDirection: 'column', marginTop: 5 }}>
                 <Text style={{ fontSize: 12, color: '#999' }}>{item.usuario}</Text>
-                <Text>{item.mensagem}</Text>
+                {typeof (item.mensagem) == "string" ?
+                  <Text>{item.mensagem}</Text>
+                  :
+                  <Text> </Text>
+                }
+
               </View>
 
             </View>

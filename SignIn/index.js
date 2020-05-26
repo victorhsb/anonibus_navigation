@@ -10,9 +10,8 @@ import firebase from 'firebase';
 
 export default SignIn = ({ navigation }) => {
 
-
-
   const { signIn } = React.useContext(AuthContext)
+
   const [textEmail, setTextEmail] = React.useState('')
   const [textPassword, setTextPassword] = React.useState('')
 
@@ -30,16 +29,14 @@ export default SignIn = ({ navigation }) => {
       <View style={styles.view_fields}>
         <TextInput
           style={styles.input_auth}
-          onChangeText={text => setTextEmail(text)}
+          onChangeText={text => setTextEmail(text.toLowerCase())}
           value={textEmail} />
 
         <TextInput
           style={styles.input_auth}
-          onChangeText={text => setTextPassword(text.toLowerCase())}
+          onChangeText={text => setTextPassword(text)}
           value={textPassword} secureTextEntry={true} />
       </View>
-
-
       <Button title="Acessar" onPress={() => handleSignIn()} />
       <Button title="Criar Conta" onPress={() => navigation.push("CreateAccount")} />
     </View>
