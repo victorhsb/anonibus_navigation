@@ -5,42 +5,38 @@ import { AuthContext } from '../context';
 
 import { } from './styles';
 
-import firebase from 'firebase';
+import firebase from 'firebase'; 
 
+export default ({ navigation }) => {
+    const { signIn } = React.useContext(AuthContext)
+    const [mail, setMail] = React.useState('')
+    const [pwd, setPwd] = React.useState('')
 
-export default SignIn = ({ navigation }) => {
+    const handleSignIn = () => {
+        firebase
+            .auth()
+            .signInWithEmailAndPassword(mail, pwd)
+            .then(() => signIn())
+            .catch(error => alert(error))
+    }
 
-  const { signIn } = React.useContext(AuthContext)
+    return (
+        <View style={styles.container}>
+            <View style={styles.view_fields}>
+                <TextInput
+                  style={styles.input_auth}
+                  onChangeText={text => {setMail(text)}}
+                  value={mail} />
 
-  const [textEmail, setTextEmail] = React.useState('')
-  const [textPassword, setTextPassword] = React.useState('')
-
-  const handleSignIn = () => {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(textEmail, textPassword)
-      .then(() => signIn())
-      .catch(error => alert(error))
-
-  }
-
-  return (
-    <View style={styles.container}>
-      <View style={styles.view_fields}>
-        <TextInput
-          style={styles.input_auth}
-          onChangeText={text => setTextEmail(text.toLowerCase())}
-          value={textEmail} />
-
-        <TextInput
-          style={styles.input_auth}
-          onChangeText={text => setTextPassword(text)}
-          value={textPassword} secureTextEntry={true} />
-      </View>
-      <Button title="Acessar" onPress={() => handleSignIn()} />
-      <Button title="Criar Conta" onPress={() => navigation.push("CreateAccount")} />
-    </View>
-  )
+                <TextInput
+                  style={styles.input_auth}
+                  onChangeText={text => setPwd(text)}
+                  value={pwd} secureTextEntry={true} />
+            </View>
+            <Button style={styles.button} title="Acessar" onPress={() => handleSignIn()} />
+            <Button style={styles.button} title="Criar Conta" onPress={() => navigation.push("CreateAccount")} />
+        </View>
+    )
 }
 
 const styles = StyleSheet.create({
@@ -53,7 +49,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
     marginVertical: 10,
-    borderRadius: 5
+    borderRadius: 5,
+    color: "#ccc"
   },
   input_auth: {
     borderColor: '#ccc',

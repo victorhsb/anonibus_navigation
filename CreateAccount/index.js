@@ -7,14 +7,13 @@ import { AuthContext } from '../context';
 import firebase from 'firebase';
 
 export default CreateAccount = () => {
-
-  const [textEmail, setTextEmail] = React.useState('')
+  const [mail, setMail] = React.useState('')
   const [textPassword, setTextPassword] = React.useState('')
 
   const handleSignUp = () => {
     firebase
       .auth()
-      .createUserWithEmailAndPassword(textEmail, textPassword)
+      .createUserWithEmailAndPassword(mail, textPassword)
       .then(() => signUp())
       .catch(error => alert(error))
   }
@@ -26,8 +25,8 @@ export default CreateAccount = () => {
       <View style={styles.view_fields}>
         <TextInput
           style={styles.input_auth}
-          onChangeText={text => setTextEmail(text.toLowerCase())}
-          value={textEmail} />
+          onChangeText={text => { console.log(text); setMail(text.toLowerCase()) }}
+          value={mail} />
 
         <TextInput
           placeholder="Digite sua senha"

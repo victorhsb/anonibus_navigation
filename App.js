@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Text } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
@@ -93,7 +93,7 @@ export default () => {
 
 
 
-  const authContext = React.useMemo(() => {
+  const authContext = useMemo(() => {
     return {
       signIn: () => { setUserToken('umMontedeCaracteres') },
       signUp: () => { setUserToken('umMontedeCaracteres') },
