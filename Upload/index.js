@@ -3,11 +3,12 @@ import React, { useState, useEffect } from "react"
 //expo install expo-image-picker
 import * as ImagePicker from "expo-image-picker"
 
-import { Button, ToastAndroid } from "react-native"
+import { ToastAndroid, Image } from "react-native"
+import { Button } from "../Components/Button"
 
 import firebase from "../config/firebase"
 
-import { WrapperView, CorrecaoView, Content, Avatar } from "./styles"
+import { WrapperView, CorrecaoView, Content, styles } from "./styles"
 
 export default function Upload() {
 	const [image, setImage] = useState(null)
@@ -51,14 +52,8 @@ export default function Upload() {
 		<CorrecaoView>
 			<WrapperView>
 				<Content>
-					{image && <Avatar source={{ uri: image }} style={{ width: 200, height: 200 }} />}
-
-					<Button
-                        title={image ? "Alterar imagem" : "Definir imagem" }
-						onPress={() => {
-							selectImage()
-						}}
-					/>
+					{image && <Image source={{ uri: image }} style={styles.avatar} />}
+					<Button title={image ? "Alterar imagem" : "Definir imagem" } onPress={selectImage}/>
 				</Content>
 			</WrapperView>
 		</CorrecaoView>

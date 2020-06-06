@@ -1,6 +1,6 @@
 import React from "react";
-import { View, Text, TextInput, StyleSheet, Button } from "react-native";
-import { } from './styles';
+import { View, TextInput, StyleSheet } from "react-native";
+import { Button } from "../Components/Button"
 
 import { AuthContext } from '../context';
 

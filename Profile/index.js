@@ -1,20 +1,16 @@
 import React from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
-import { } from './styles';
+import { View, Text, StyleSheet } from "react-native";
+import { Button } from "../Components/Button"
 
 import { AuthContext } from '../context';
 
 import firebase from 'firebase';
 
-
-
 export default Profile = () => {
-
   const { signOut } = React.useContext(AuthContext)
 
   const handleSignOut = () => {
     firebase.auth().signOut().then(function () {
-      // Sign-out successful.
       signOut();
     }).catch(function (error) {
       alert(error)
@@ -24,7 +20,7 @@ export default Profile = () => {
   return (
     <View style={styles.container}>
       <Text>PROFILE</Text>
-      <Button title="Sair" onPress={() => handleSignOut()} />
+      <Button title="Sair" icon="sign-out-alt" onPress={() => handleSignOut()} />
     </View>
   )
 }

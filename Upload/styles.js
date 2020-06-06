@@ -1,5 +1,4 @@
-// expo install styled-components
-
+import { StyleSheet } from "react-native"
 import styled from "styled-components/native"
 
 export const WrapperView = styled.View`
@@ -20,9 +19,13 @@ export const Content = styled.View`
 	align-items: center;
 `
 
-export const Avatar = styled.Image`
-	width: 200px;
-	height: 200px;
-	border-radius: 100px;
-	border: 3px solid #333;
-`
+export const styles = StyleSheet.create({
+    avatar: {
+        width: 200,
+        height: 200,
+        borderRadius: 100,
+        borderWidth: 3,
+        borderStyle: "solid",
+        borderColor: "#333"
+    }
+})

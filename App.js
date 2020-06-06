@@ -7,8 +7,6 @@ import { createDrawerNavigator } from "@react-navigation/drawer"
 
 import SignIn from "./SignIn"
 import CreateAccount from "./CreateAccount"
-import Home from "./Home"
-import HomeDetails from "./Home/details"
 import Profile from "./Profile"
 import Chat from "./Chat"
 import Upload from "./Upload"
@@ -24,14 +22,6 @@ const AuthStack = createStackNavigator()
 const Tabs = createBottomTabNavigator()
 const Drawer = createDrawerNavigator()
 
-const HomeStack = createStackNavigator()
-const HomeStackScreen = () => (
-	<HomeStack.Navigator>
-		<HomeStack.Screen name="Home" component={Home} />
-		<HomeStack.Screen name="HomeDetails" component={HomeDetails} />
-	</HomeStack.Navigator>
-)
-
 const ProfileStack = createStackNavigator()
 
 const ProfileStackScreen = () => (
@@ -41,7 +31,6 @@ const ProfileStackScreen = () => (
 )
 
 const iconNames = {
-	Home: "home",
 	Profile: "user",
 	Chat: "comments",
 	Upload: "cloud-upload-alt",
@@ -54,7 +43,6 @@ const TabsScreen = () => (
 		})}
 		tabBarOptions={{ activeTintColor: "tomato", inactiveTintColor: "gray" }}
 	>
-		<Tabs.Screen name="Home" component={HomeStackScreen} />
 		<Tabs.Screen name="Profile" component={ProfileStackScreen} />
 		<Tabs.Screen name="Chat" component={Chat} />
 		<Tabs.Screen name="Upload" component={Upload} />
