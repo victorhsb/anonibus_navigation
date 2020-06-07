@@ -6,24 +6,36 @@ admin.initializeApp()
 
 let db = admin.firestore()
 
-exports.sendMessage = functions.https.onRequest((request, response) => {
-	let queryRef = db
-		.collection("chats")
-		.doc("sala_01")
-		.collection("mensagens")
-		.doc()
+exports.sendMessage = functions
+    .runWith({memory: '128MB', timeoutSeconds: 5})
+    .https.onRequest(async (request, response) => {
+            let queryRef = db
+                .collection("chats")
+                .doc("chat_01")
+                .collection("/messages")
+                .doc()
 
-		queryRef.set({
-			message: request.body.message,
-			user: request.body.user,
-			avatar: request.body.avatar,
-            expiresAt: request.body.expiresAt,
-        }).then(() => {
-            response.json({ ok: true })
-        }).catch(e => {
-            response.json({ error: true, data: e })
-        })
-})
+            try {
+                let createdAt = new Date().getTime()
+                let message = {
+                    message: request.body.message,
+                    user: request.body.user,
+                    avatar: request.body.avatar,
+                    createdAt: createdAt,
+                }
+
+                if (request.body.timed) {
+                    // 10 minutes from now
+                    message.expiresAt = ( createdAt + 600000 )
+                }
+
+                await queryRef.set(message)
+                response.json({ ok: true })
+            } catch (e) {
+                response.json({ error: true, data: e })
+            }
+        }
+    )
 
 exports.imageUpdateFirestore = functions.storage.object().onFinalize((object) => {
 	const filePath = object.name

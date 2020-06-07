@@ -1,4 +1,15 @@
-import {StyleSheet} from "react-native"
+import {StyleSheet, Text} from "react-native"
+import styled from "styled-components"
+
+export const UserName = styled(Text)`
+    fontSize: 14;
+    color: #666;
+`
+
+export const SentTime = styled(Text)`
+    fontSize: 12;
+    color: #999;
+`
 
 export const styles = StyleSheet.create({
     sendButton: {
@@ -51,6 +62,10 @@ export const styles = StyleSheet.create({
         width: '100%',
         borderTopColor: '#e6e6e6',
         borderTopWidth: 1,
+    },
+    chatContent:{
+        flexDirection: "column",
+        marginTop: 5
     },
     chatLine: {
         flexDirection: 'row',
